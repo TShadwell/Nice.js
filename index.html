@@ -1,0 +1,349 @@
+<!DOCTYPE HTML>
+<head>
+	<title>Nice.js</title>
+	<style type="text/css">
+	@import url(http://fonts.googleapis.com/css?family=Oleo+Script);
+	head, title, script{
+		display:block;
+		color:white;
+		font-family:sans-serif;
+	}
+	script{
+		color:black;
+		font-family:monospace;
+		white-space:pre;
+		font-size:12px;
+		border:1px dashed black;
+		padding:5px;
+		box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+		margin-left:auto;
+		margin-right:auto;
+		word-wrap: break-word;
+	}
+	script:before{
+		content:"//Javascript code-";
+		text-shadow: 1px 1px 0px #b1b1b1;
+	}
+	body{
+		font-family:sans-serif;
+	}
+	title{
+		position:relative;
+		width:100%;
+		text-align:center;
+		font-size:90px;
+		font-family: 'Oleo Script', sans-serif;
+		border-bottom:1px solid white;
+		text-shadow: 1px 2px 0px #b1b1b1,
+		4px 8px 7px rgba(0,0,0,0.5);
+		line-height:80px;
+		background:                                                                                                       rgb(0,183,234); 
+		background:                                             -moz-linear-gradient(top,  rgba(0,183,234,1) 0%, rgba(0,158,195,1) 100%); 
+		background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,183,234,1)), color-stop(100%,rgba(0,158,195,1))); 
+		background:                                           -webkit-linear-gradient(top,  rgba(0,183,234,1) 0%,rgba(0,158,195,1) 100%); 
+		background:                                                -o-linear-gradient(top,  rgba(0,183,234,1) 0%,rgba(0,158,195,1) 100%); 
+		background:                                               -ms-linear-gradient(top,  rgba(0,183,234,1) 0%,rgba(0,158,195,1) 100%); 
+		background:                                                   linear-gradient(top,  rgba(0,183,234,1) 0%,rgba(0,158,195,1) 100%); 
+		filter:              progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', endColorstr='#009ec3',GradientType=0 ); 
+	}
+	html{
+		padding:0px;
+		background-color:white;
+
+	}
+	body:before{
+		/*Hohoho*/
+		content:"Nice.js";
+		font-family: 'Oleo Script', sans-serif;
+	}
+	nav{
+		width:800px;
+		margin-left:auto;
+		margin-right:auto;
+		text-align:center;
+	}
+	#imgurl{
+		display:block;
+		width:780px;
+
+	}
+	body{
+		margin-top:5px;
+		background-color:white;
+		margin-left:auto;
+		margin-right:auto;
+		width:800px;
+		padding:10px;
+		padding-top:20px;
+	}
+	input{
+		border:0px;
+		margin-top:10px;
+		margin-bottom:10px;
+		border-bottom:1px solid black;
+		display:inline;
+		width:140px;
+		margin-left:10px;
+	}
+		#i{
+			width:auto;
+		}
+	a+textarea{
+		margin-top:20px;
+	}
+	#input:before{
+		content:"//Input code";
+	}
+	#output:before{
+		content:"//Output code";
+	}
+	#h + #t{
+		margin-right:10px;
+	}
+	textarea{
+		font-family:monospace;
+		margin-left:auto;
+		margin-right:auto;
+		display:block;
+		position:relative;
+		width:780px;
+		border:0px;
+		border-bottom:1px solid black;
+		height:500px;
+		margin-bottom:10px;
+	}
+	a {
+		font-family: 'Oleo Script', sans-serif;
+		cursor:pointer;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		font-size: 20px;
+		color: #ffffff;
+		padding: 5px 10px;
+		background: -moz-linear-gradient(
+			top,
+			#259fcc 0%,
+			#0b508c);
+		background: -webkit-gradient(
+			linear, left top, left bottom, 
+			from(#259fcc),
+			to(#0b508c));
+		margin-top:10px;
+		border: 1px solid #ffffff;
+		-moz-box-shadow:
+			0px 1px 3px rgba(0,0,0,0.5),
+			inset 0px 0px 1px rgba(0,0,0,0.7);
+		-webkit-box-shadow:
+			0px 1px 3px rgba(0,0,0,0.5),
+			inset 0px 0px 1px rgba(0,0,0,0.7);
+		text-shadow:
+			0px -1px 0px rgba(000,000,000,0.4),
+			0px 1px 0px rgba(255,255,255,0.3);
+			margin-bottom:10px;
+		}
+
+
+	</style>
+
+</head>
+<body>
+	
+	is a Javascript that can make ASCII art out of other Javascript.
+	<input placeholder="Paste Data URI" type="text" id="imgurl"/>
+	<nav><a onClick="loadImage(document.getElementById('imgurl').value)">Load Image</a>
+	<input placeholder="Image width" id="w" type="text"/>
+	<input placeholder="Image height" id="h" type="text"/>
+	<input placeholder="Threshold- 0-255." id="t" type="text"/>
+	Invert<input id="i" type="checkbox" checked/>
+	<a onCLick="processImage(
+		document.getElementById('w').value,
+		document.getElementById('h').value,
+		document.getElementById('t').value,
+		document.getElementById('i').checked
+				)">Process Image</a></nav>
+	<canvas id="image" width="800" height="400">
+	You need to get a better browser.
+	</canvas>
+	<textarea id="input"></textarea>
+		<a onCLick="document.getElementById('output').value=processText(
+			document.getElementById('input').value,
+			document.getElementById('w').value
+		)">Process Text</a></nav>
+	<textarea id="output"></textarea>
+<script type="text/javascript">
+canvas = document.getElementById("image").getContext("2d");
+window.horror=2;
+window.cod="";
+lightnessLuma = function(r,g,b){
+	val = ((0.3*r+0.59*g+0.11*b));
+	return parseInt(val);
+}
+processImage= function(width, height, threshold, invert){
+	//Get image data
+	window.pixularData = canvas.getImageData(0,0, width, height);
+	window.newPixularData = pixularData;
+	window.cod="";
+	for (k=0;k<pixularData.data.length;k+=4){
+		if (invert){
+			b=(lightnessLuma(pixularData.data[k],pixularData.data[k+1],pixularData.data[k+2])>threshold?0:255);
+		}
+		else{
+			b=(lightnessLuma(pixularData.data[k],pixularData.data[k+1],pixularData.data[k+2])>threshold?255:0);
+		}
+		
+		window.newPixularData.data[k]=b;
+		window.newPixularData.data[k+1]=b;
+		window.newPixularData.data[k+2]=b;
+		if (b){
+			window.cod+=" ";
+		}
+		else{
+			window.cod+="X";
+		}
+		//console.log("K is: "+k+ ", width is " + width + ", (width%(k+2)) is " + (width%(k+2)) + "((width%(k+2))==0) is "+ ((width%(k+2))==0));
+
+		canvas.clearRect (0, 0, width, height);
+		canvas.putImageData(window.newPixularData, 0, 0);
+	}
+}
+loadImage = function(imgData){
+	var img = new Image();
+	img.src=imgData;
+	img.onload=function(){
+		//Draw image
+		canvas.drawImage(img,0,0);
+	}
+}
+
+processText= function(text, width){
+	if(typeof(window.cod)=="undefined"){
+		alert("You need to have a processed image first!");
+	}
+	else{
+		var out = "";
+		var encoded = compile(text, "$").split(";");
+		var prelude = encoded[0];
+		var main= encoded [1];
+		var out = prelude+";\n\n\n";
+		var i=0;
+		var c=0;
+		while (i++<window.cod.length-1){
+			if (window.cod[i]== "X"){
+				if(typeof(main[c])=="undefined"){
+					out+= ";";
+				}
+				else{
+					out+= main[c];
+				}
+				
+				c++;
+			}
+			else{
+				out+=window.cod[i];
+			}
+			if((i%width)==0){
+				out+="\n";
+			}
+		}
+		out+="\n\n\n"+main.slice(c);
+	return out
+	}
+}
+var numberToMess = function (num) {
+	if (num == 0) return "(+[])";
+	else if (num == 1) return "(+!+[])";
+	else {
+		var str = "";
+		for (var d = 0; d < num; d++) {
+			str += "!+[]+";
+		}
+		return "+" + str.slice(0, -1);
+	}
+}
+var stringToCharCodeArrayString = function (string) {
+	cc = [];
+	for (var i = 0; i < string.length; ++i) {
+		cc[i] = string.charCodeAt(i);
+	}
+	if (window.horror == 3) {
+		cc = cc.map(numberToMess);
+	}
+	return cc.join(",");
+}
+var constructors=[
+	"_=\"constructor\"_[_][_]",
+	"_=([![]]+{})[+!+[]+[+[]]]+([]+[]+{})[+!+[]]+([]+[]+[][[]])[+!+[]]+(![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[+!+[]]+(!![]+[])[!+[]+!+[]]+([![]]+{})[+!+[]+[+[]]]+(!![]+[])[+[]]+([]+[]+{})[+!+[]]+(!![]+[])[+!+[]];_[_][_]",
+	"(![]+[])[+[]][([![]]+{})[+!+[]+[+[]]]+([]+[]+{})[+!+[]]+([]+[]+[][[]])[+!+[]]+(![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[+!+[]]+(!![]+[])[!+[]+!+[]]+([![]]+{})[+!+[]+[+[]]]+(!![]+[])[+[]]+([]+[]+{})[+!+[]]+(!![]+[])[+!+[]]][([![]]+{})[+!+[]+[+[]]]+([]+[]+{})[+!+[]]+([]+[]+[][[]])[+!+[]]+(![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[+!+[]]+(!![]+[])[!+[]+!+[]]+([![]]+{})[+!+[]+[+[]]]+(!![]+[])[+[]]+([]+[]+{})[+!+[]]+(!![]+[])[+!+[]]]"
+]
+window.constructo=";_=\"constructor\";_[_][_]";
+window.dict = {
+	'a': '(![]+[])[+!+[]]',
+	'b': '([]+[]+{})[!+[]+!+[]]',
+	'c': '([![]]+{})[+!+[]+[+[]]]',
+	'd': '([]+[]+[][[]])[!+[]+!+[]]',
+	'e': '(!![]+[])[!+[]+!+[]+!+[]]',
+	'f': '(![]+[])[+[]]',
+	'i': '([![]]+[][[]])[+!+[]+[+[]]]',
+	'j': '([]+[]+{})[+!+[]+[+[]]]',
+	'l': '(![]+[])[!+[]+!+[]]',
+	'N': '(+{}+[]+[])[+[]]',
+	'n': '([]+[]+[][[]])[+!+[]]',
+	'O': '(![]+[]+[]+[]+{})[+!+[]+[]+[]+(!+[]+!+[]+!+[])]',
+	'o': '([]+[]+{})[+!+[]]',
+	'r': '(!![]+[])[+!+[]]',
+	's': '(![]+[])[!+[]+!+[]+!+[]]',
+	't': '(!![]+[])[+[]]',
+	'u': '(!![]+[])[!+[]+!+[]]',
+	' ': '(+{}+[]+[]+[]+[]+{})[+!+[]+[+[]]]',
+	'[': '([]+[]+{})[+[]]',
+	']': '([]+[]+{})[+!+[]+[]+[]+(!+[]+!+[]+!+[]+!+[])]'
+}
+var compileToString = function (codeasstring, extrasvalue) {
+	window.cacheNumbers=[];
+	var c = " " + codeasstring;
+	var out = "";
+	var extras = "";
+
+	for (var i = 0, chr = ''; i < c.length; i++, chr = c[i]) {
+		if (i != 0) {
+			if (chr in dict) {
+				out += dict[chr] + "+";
+			} else {
+				if (extras.indexOf(chr) == -1) {
+					extras += chr;
+				}
+				if (window.horror == 1) {
+					out += extrasvalue + "[" + extras.indexOf(chr) + "]+";
+				} else {
+					out += extrasvalue + "[" + numberToMess(extras.indexOf(chr)) + "]+";
+				}
+			}
+		}
+	}
+	return extrasvalue + "=String.fromCharCode(" + stringToCharCodeArrayString(extras) + ");" + out.slice(0, -1);
+}
+var compile = function (codeasstring, extrasvalue) {
+	m = compileToString(codeasstring, extrasvalue).split(";");
+	return m[0] + ";"+ window.constructo + "(" + m[1] + ")();";
+}
+window.code = {
+	compile: function () {
+		document.getElementById("compiledCode").value = compile(
+			document.getElementById("code").value,
+			document.getElementById("shortvar").value
+		);
+	},
+	compileToString: function () {
+		document.getElementById("compiledCode").value = compileToString(
+			document.getElementById("code").value,
+			document.getElementById("shortvar").value
+		);
+	}
+}
+window.constructo=constructors[2];
+	</script>
+</body>
