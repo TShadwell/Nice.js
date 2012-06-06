@@ -209,8 +209,6 @@ processImage= function(width, height, threshold, invert){
 		else{
 			window.cod+="X";
 		}
-		//console.log("K is: "+k+ ", width is " + width + ", (width%(k+2)) is " + (width%(k+2)) + "((width%(k+2))==0) is "+ ((width%(k+2))==0));
-
 		canvas.clearRect (0, 0, width, height);
 		canvas.putImageData(window.newPixularData, 0, 0);
 	}
@@ -221,6 +219,8 @@ loadImage = function(imgData){
 	img.onload=function(){
 		//Draw image
 		canvas.drawImage(img,0,0);
+		document.getElementById("w").value=img.width;
+		document.getElementById("h").value=img.height;	
 	}
 }
 
