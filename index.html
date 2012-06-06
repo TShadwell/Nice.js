@@ -159,7 +159,7 @@
 	<input placeholder="Image height" id="h" type="text"/>
 	<input placeholder="Threshold- 0-255." id="t" type="text"/>
 	Invert<input id="i" type="checkbox" checked/>
-	<a onCLick="processImage(
+	<a onClick="processImage(
 		document.getElementById('w').value,
 		document.getElementById('h').value,
 		document.getElementById('t').value,
@@ -169,10 +169,11 @@
 	You need to get a better browser.
 	</canvas>
 	<textarea id="input"></textarea>
-		<a onCLick="document.getElementById('output').value=processText(
+		<a onClick="document.getElementById('output').value=processText(
 			document.getElementById('input').value,
-			document.getElementById('w').value
-		)">Process Text</a></nav>
+			document.getElementById('w').value,
+			document.getElementById('varname').value
+		)">Process Text</a><input placeholder="Var name ($)." id="varname" type="text"/>
 	<textarea id="output"></textarea>
 	<script> 
 /* Nice.js
@@ -223,13 +224,14 @@ loadImage = function(imgData){
 	}
 }
 
-processText= function(text, width){
+processText= function(text, width, variableName){
 	if(typeof(window.cod)=="undefined"){
 		alert("You need to have a processed image first!");
 	}
 	else{
+		variableName=(typeof(variableName)=="undefined"?"$":variableName);
 		var out = "";
-		var encoded = compile(text, "$").split(";");
+		var encoded = compile(text, variableName).split(";");
 		var prelude = encoded[0];
 		var main= encoded [1];
 		var out = prelude+";\n\n\n";
